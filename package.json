@@ -1,0 +1,14 @@
+{
+  "name": "@danroshko/feature-toggle",
+  "version": "0.1.0",
+  "description": "Utilities for implementing feature toggles in JavaScript",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "devDependencies": {
+    "@types/jest": "^24.0.15",
+    "jest": "^24.8.0"
+  },
+  "license": "MIT"
+}
