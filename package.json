@@ -3,6 +3,7 @@
   "version": "0.2.0",
   "description": "Utilities for implementing feature toggles in JavaScript",
   "main": "index.js",
+  "types": "index.d.ts",
   "scripts": {
     "test": "jest"
   },
