@@ -12,8 +12,8 @@ class FeatureToggle {
     }
 
     this.defaultEnabled = disabledFeatures != null
-    this.enabledFeatures = enabledFeatures
-    this.disabledFeatures = disabledFeatures
+    this.enabledFeatures = new Set(enabledFeatures)
+    this.disabledFeatures = new Set(disabledFeatures)
   }
 
   /**
@@ -47,18 +47,29 @@ class FeatureToggle {
 
 /**
  * Check if *features* contain *feature*
- * @param {string[]} features
+ * @param {Set<string>} features
  * @param {string} feature
  */
 const contains = (features, feature) => {
-  for (const item of features) {
-    if (feature === item || feature.startsWith(item + ':')) {
+  if (!feature) return false
+
+  let part = feature
+
+  // check for each prefix, e.g. 'a:b:c' -> 'a:b' -> 'a'
+  while (true) {
+    if (features.has(part)) {
       return true
     }
-  }
 
-  // not found
-  return false
+    const lastSeparator = part.lastIndexOf(':')
+
+    // not found
+    if (lastSeparator === -1) {
+      return false
+    }
+
+    part = part.slice(0, lastSeparator)
+  }
 }
 
 module.exports = FeatureToggle

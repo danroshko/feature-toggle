@@ -8,13 +8,14 @@ describe('FeatureToggle', () => {
   })
 
   it('works with enabledFeatures', () => {
-    const toggle = new FeatureToggle({ enabledFeatures: ['foo', 'bar', 'a:b'] })
+    const toggle = new FeatureToggle({ enabledFeatures: ['foo', 'bar', 'a:b', '1:2:3:4:5'] })
 
     expect(toggle.isEnabled('foo')).toBe(true)
     expect(toggle.isEnabled('a:b')).toBe(true)
     expect(toggle.isEnabled('foo:123')).toBe(true)
     expect(toggle.isEnabled('1234')).toBe(false)
     expect(toggle.isEnabled('a')).toBe(false)
+    expect(toggle.isEnabled('1:2:3:4:5:6:7')).toBe(true)
 
     expect(toggle.isDisabled('bar')).toBe(false)
     expect(toggle.isDisabled('bar:nested')).toBe(false)
