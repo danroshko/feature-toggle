@@ -35,4 +35,21 @@ describe('FeatureToggle', () => {
     expect(toggle.isDisabled('a:a')).toBe(true)
     expect(toggle.isDisabled('f')).toBe(false)
   })
+
+  it('allows enabling features', () => {
+    const toggle = new FeatureToggle({ enabledFeatures: ['foo'] })
+    expect(toggle.isEnabled('bar')).toBe(false)
+
+    toggle.enable('bar')
+    expect(toggle.isEnabled('bar')).toBe(true)
+  })
+
+  it('allows disabling features', () => {
+    const toggle = new FeatureToggle({ enabledFeatures: ['foo', 'bar:abc'] })
+    expect(toggle.isEnabled('bar:abc')).toBe(true)
+
+    toggle.disable('bar')
+    expect(toggle.isEnabled('bar:abc')).toBe(false)
+    expect(toggle.isEnabled('bar')).toBe(false)
+  })
 })

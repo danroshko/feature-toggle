@@ -43,6 +43,21 @@ class FeatureToggle {
     // wee need to scan disabledFeatures
     return contains(this.disabledFeatures, feature)
   }
+
+  /**
+   * @param {string} feature
+   */
+  enable(feature) {
+    return this.defaultEnabled ? remove(this.disabledFeatures, feature) : this.enabledFeatures.add(feature)
+  }
+
+  /**
+   *
+   * @param {string} feature
+   */
+  disable(feature) {
+    return this.defaultEnabled ? this.disabledFeatures.add(feature) : remove(this.enabledFeatures, feature)
+  }
 }
 
 /**
@@ -69,6 +84,21 @@ const contains = (features, feature) => {
     }
 
     part = part.slice(0, lastSeparator)
+  }
+}
+
+/**
+ * Remove feature itself and all other features containing it as a prefix
+ * @param {Set<string>} features
+ * @param {string} feature
+ */
+const remove = (features, feature) => {
+  const prefix = feature + ':'
+
+  for (const item of features) {
+    if (item === feature || item.startsWith(prefix)) {
+      features.delete(item)
+    }
   }
 }
 

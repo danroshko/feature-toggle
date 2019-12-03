@@ -25,6 +25,9 @@ toggle1.isDisabled('foo') // true
 
 toggle2.isEnabled('c') // false
 toggle2.isEnabled('foo') // true
+
+toggle1.enable('x')
+toggle1.disable('a')
 ```
 
 Namespacing can be achieved by using `:` symbol in feature names, e.g. if feature `a` is enabled, then all features in the form `a:something` will also be enabled.
